@@ -61,7 +61,11 @@ if IS_MACOS
 libmplapack_qd_la_LDFLAGS += -Wl,-flat_namespace,-undefined,dynamic_lookup
 endif
 if IS_MINGW
+if ENABLE_OPTIMIZATION
+libmplapack_qd_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/optimized/qd -lmpblas_qd_opt -L$(QD_LIBDIR) -lqd
+else
 libmplapack_qd_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/reference -lmpblas_qd -L$(QD_LIBDIR) -lqd
+endif
 endif
 endif
 
@@ -73,7 +77,11 @@ if IS_MACOS
 libmplapack_dd_la_LDFLAGS += -Wl,-flat_namespace,-undefined,dynamic_lookup
 endif
 if IS_MINGW
+if ENABLE_OPTIMIZATION
+libmplapack_dd_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/optimized/dd -lmpblas_dd_opt -L$(QD_LIBDIR) -lqd
+else
 libmplapack_dd_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/reference -lmpblas_dd -L$(QD_LIBDIR) -lqd
+endif
 endif
 endif
 
@@ -85,7 +93,11 @@ if IS_MACOS
 libmplapack_double_la_LDFLAGS += -Wl,-flat_namespace,-undefined,dynamic_lookup
 endif
 if IS_MINGW
+#if ENABLE_OPTIMIZATION
+#libmplapack_double_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/optimized/double -lmpblas_double_opt
+#else
 libmplapack_double_la_LDFLAGS += -no-undefined -L$(top_builddir)/mpblas/reference -lmpblas_double
+#endif
 endif
 endif
 
