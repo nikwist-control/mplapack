@@ -28,6 +28,7 @@
 
 #include <mpblas.h>
 #include <mplapack.h>
+#include <limits>
 
 void Rposvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const nrhs, REAL *a, INTEGER const lda, REAL *af, INTEGER const ldaf, char *equed, REAL *s, REAL *b, INTEGER const ldb, REAL *x, INTEGER const ldx, REAL &rcond, REAL *ferr, REAL *berr, REAL *work, INTEGER *iwork, INTEGER &info) {
     //
@@ -146,7 +147,10 @@ void Rposvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const n
     //
     //     Compute the reciprocal of the condition number of A.
     //
+    /**
     Rpocon(uplo, n, af, ldaf, anorm, rcond, work, iwork, info);
+    **/
+   rcond = REAL(std::numeric_limits<double>::quiet_NaN());
     //
     //     Compute the solution matrix X.
     //
@@ -174,9 +178,11 @@ void Rposvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const n
     //
     //     Set INFO = N+1 if the matrix is singular to working precision.
     //
+    /**
     if (rcond < Rlamch("Epsilon")) {
         info = n + 1;
     }
+    **/
     //
     //     End of Rposvx
     //

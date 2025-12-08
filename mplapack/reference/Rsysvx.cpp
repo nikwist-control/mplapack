@@ -28,6 +28,7 @@
 
 #include <mpblas.h>
 #include <mplapack.h>
++#include <limits>
 
 void Rsysvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const nrhs, REAL *a, INTEGER const lda, REAL *af, INTEGER const ldaf, INTEGER *ipiv, REAL *b, INTEGER const ldb, REAL *x, INTEGER const ldx, REAL &rcond, REAL *ferr, REAL *berr, REAL *work, INTEGER const lwork, INTEGER *iwork, INTEGER &info) {
     //
@@ -119,7 +120,10 @@ void Rsysvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const n
     //
     //     Compute the reciprocal of the condition number of A.
     //
+    /**
     Rsycon(uplo, n, af, ldaf, ipiv, anorm, rcond, work, iwork, info);
+    **/
+    rcond = REAL(std::numeric_limits<double>::quiet_NaN());
     //
     //     Compute the solution vectors X.
     //
@@ -133,9 +137,11 @@ void Rsysvx(const char *fact, const char *uplo, INTEGER const n, INTEGER const n
     //
     //     Set INFO = N+1 if the matrix is singular to working precision.
     //
+    /**
     if (rcond < Rlamch("Epsilon")) {
         info = n + 1;
     }
+    **/
     //
     work[1 - 1] = lwkopt;
     //
