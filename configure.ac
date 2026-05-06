@@ -863,7 +863,7 @@ if test x"$enable_optimization" = x"yes" && test x"$enable_debug" != x"yes" ; th
                    CXXFLAGS="$CXXFLAGS -xHost -O2 -finline-functions -funroll-all-loops"
                fi
            else #GCC
-               CXXFLAGS="$CXXFLAGS -march=native -O2 -finline-functions -funroll-all-loops"
+               CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -O2 -finline-functions -funroll-all-loops"
            fi
            if test x"$is_intelcc" = x"1"; then
                if cat /proc/cpuinfo | grep Ryzen >& /dev/null ; then
@@ -872,7 +872,7 @@ if test x"$enable_optimization" = x"yes" && test x"$enable_debug" != x"yes" ; th
                    CFLAGS="$CFLAGS -xHost -O2 -finline-functions"
                fi
            else #GCC
-               CFLAGS="$CFLAGS -march=native -O2 -finline-functions -funroll-all-loops"
+               CFLAGS="$CFLAGS -march=x86-64-v3 -O2 -finline-functions -funroll-all-loops"
            fi
            FCFLAGS="$FCFLAGS -O2 -finline-functions -funroll-all-loops"
        ;;
